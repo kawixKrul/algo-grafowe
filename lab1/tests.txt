@@ -1,0 +1,16 @@
+rand1000_100000 99301
+rand20_100 68
+g1 4
+clique5 90
+pp1000 960
+grid100x100 2735
+rand100_500 344
+path10 11
+clique1000 99
+grid5x5 9
+path1000 10
+pp10 4
+pp100 64
+clique20 89
+clique100 98
+path10000 10
