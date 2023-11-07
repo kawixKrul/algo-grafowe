@@ -1,7 +1,5 @@
-from queue import Queue
 from typing import Tuple
 from math import inf
-
 from test import runtests
 
 
@@ -47,43 +45,9 @@ def kruskal_algorithm(E: list[tuple[int, int, int]], n, s=0, t=1):
     return min_weight
 
 
-def create_graph(V: int, L: Tuple[int, int, int]):
-    graph = [[] for _ in range(V)]
-
-    for (x, y, c) in L:
-        graph[x - 1].append([y - 1, c])
-        graph[y - 1].append([x - 1, c])
-
-    return graph
-
-
-
-def get_min_from_path(G):
-    parent = [None for _ in range(len(G))]
-    visited = [False for _ in range(len(G))]
-    parent_edge = [0 for _ in range(len(G))]
-    Q = Queue()
-    Q.put(0)
-    visited[0] = True
-    while not Q.empty():
-        u = Q.get()
-        for (v, l) in G[u]:
-            if not visited[v]:
-                Q.put(v)
-                visited[v] = True
-                parent[v] = u
-                parent_edge[v] = l
-    curr = parent[1]
-    edges = [parent_edge[1]]
-    while curr is not None:
-        edges.append(parent_edge[curr])
-        curr = parent[curr]
-    return min(edges[:-1])
-
-
-def wrapper(V: int, L: Tuple[int, int, int]):
+def wrapper_kruskal(V: int, L: Tuple[int, int, int]):
     result_kruskal = kruskal_algorithm(L, V)
     return result_kruskal
 
 
-runtests(wrapper)
+runtests(wrapper_kruskal)

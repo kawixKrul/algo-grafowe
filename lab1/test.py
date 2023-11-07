@@ -1,13 +1,23 @@
 import os
 import time
+import unittest
 from typing import Tuple
 from dimacs import loadWeightedGraph
-
 
 test_case = {}
 path = "../graphs-lab1"
 V: int  # Liczba wierzchołków
 L: Tuple[int, int, int]  # List krawędzi
+
+
+def create_graph(V: int, L: Tuple[int, int, int]):
+    graph = [[] for _ in range(V)]
+
+    for (x, y, c) in L:
+        graph[x - 1].append([y - 1, c])
+        graph[y - 1].append([x - 1, c])
+
+    return graph
 
 
 def runtests(func):
@@ -23,7 +33,6 @@ def runtests(func):
             try:
                 assert result == int(expected)
             except AssertionError:
-                print("huj")
                 passed.append(False)
             else:
                 passed.append(True)
@@ -38,11 +47,13 @@ Total time: {round(sum(times),3)} seconds""")
 
 
 if __name__ == "__main__":
-    for root, dirs, file in os.walk(path):
-        for f in file:
-            test_case[f] = int(open(path+"/"+f).readlines()[0].split(" ")[-1].strip())
+    if not os.path.exists("tests.txt"):
+        for root, dirs, file in os.walk(path):
+            for f in file:
+                test_case[f] = int(open(path+"/"+f).readlines()[0].split(" ")[-1].strip())
 
-    with open("tests.txt", "w") as f:
-        for key, value in test_case.items():
-            f.write(f"{key} {value}\n")
+        with open("tests.txt", "w") as f:
+            for key, value in test_case.items():
+                f.write(f"{key} {value}\n")
+
 
