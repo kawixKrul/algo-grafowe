@@ -1,7 +1,6 @@
 from test import runtests, create_graph
 
 
-# TODO fix me
 def dfs_bin_search(V, L):
     def dfs(G, mini, s, t):
         n = len(G)
@@ -26,8 +25,8 @@ def dfs_bin_search(V, L):
                 r = mid - 1
             else:
                 l = mid + 1
-            if r < len(T):
-                return T[r]
+        if r < len(T):
+            return T[r]
         return -1
 
     G = create_graph(V, L)
