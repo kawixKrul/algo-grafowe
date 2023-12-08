@@ -27,7 +27,7 @@ def augmenting_path(Graph: list[tuple[int, int]], source: int, sink: int, graph_
 
     if visited[sink]:
         v = sink
-        minW = flowBetween[v]  # same result as float('inf')
+        minW = flowBetween[v] 
         while v != source:
             path.append(v)
             minW = min(minW, flowBetween[v])
@@ -39,14 +39,14 @@ def augmenting_path(Graph: list[tuple[int, int]], source: int, sink: int, graph_
 
 
 def FordFulkerson_List(List: list[tuple[int, int]], s: int, t: int, graph_search_func):
-    count = 0
+    flow = 0
     augPath, minW = augmenting_path(List, s, t, graph_search_func)
     while augPath:
         update_weights(List, augPath, minW)
-        count += minW
+        flow += minW
         augPath, minW = augmenting_path(List, s, t, graph_search_func)
 
-    return count
+    return flow
 
 
 
